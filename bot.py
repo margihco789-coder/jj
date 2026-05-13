@@ -53,7 +53,7 @@ def send_tool(call, category_key):
 # --- Handlers ---
 @bot.message_handler(commands=['start'])
 def start_command(message):
-    bot.send_message(message.chat.id, START_TEXT, reply_markup=main_menu())
+    bot.send_message(message.chat.id, START_TEXT, parse_mode='Markdown', reply_markup=main_menu())
 
 @bot.callback_query_handler(func=lambda call: True)
 def callback_handler(call):
@@ -70,7 +70,8 @@ def callback_handler(call):
             chat_id=call.message.chat.id,
             message_id=call.message.message_id,
             text=START_TEXT,
-            reply_markup=main_menu()
+            reply_markup=main_menu(),
+            parse_mode='Markdown'
         )
     elif call.data == "back_ai":
         bot.edit_message_text(
